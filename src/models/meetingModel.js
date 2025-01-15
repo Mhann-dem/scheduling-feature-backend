@@ -1,4 +1,3 @@
-// src/models/meetingModel.js
 const db = require('../config/dbConfig');
 
 // Fetch all meetings
