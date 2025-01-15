@@ -1,0 +1,10 @@
+POST http://localhost:5000/api/meetings
+Content-Type: application/json
+
+{
+  "title": "Team Sync",
+  "date": "2025-01-20",
+  "time": "15:00",
+  "duration": 60,
+  "participants": ["jane.doe@example.com", "john.smith@example.com"]
+}
