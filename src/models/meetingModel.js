@@ -41,13 +41,18 @@ const createMeeting = (data, callback) => {
 // Update a meeting
 const updateMeeting = (id, data, callback) => {
   const { title, date, time, duration, participants } = data;
-  const query = `UPDATE meetings SET title = ?, date = ?, time = ?, duration = ?, participants = ? WHERE id = ?`;
-  db.query(query, [title, date, time, duration, participants, id], callback);
-};
 
-// Delete a meeting
-const deleteMeeting = (id, callback) => {
-  db.query('DELETE FROM meetings WHERE id = ?', [id], callback);
+  const query = `
+    UPDATE meetings
+    SET title = ?, date = ?, time = ?, duration = ?, participants = ?
+    WHERE id = ?
+  `;
+  const values = [title, date, time, duration, JSON.stringify(participants), id];
+
+  console.log('Executing query:', query); // Debugging log
+  console.log('With values:', values); // Debugging log
+
+  db.query(query, values, callback);
 };
 
 module.exports = {

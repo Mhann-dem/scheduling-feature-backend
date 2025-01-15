@@ -1,4 +1,4 @@
-const { getAllMeetings, createMeeting, deleteMeeting, updateMeeting, getMeetingById } = require('../models/meetingModel');
+const { getAllMeetings, createMeeting, deleteMeeting, updateMeeting } = require('../models/meetingModel');
 
 // Get all meetings
 const fetchMeetings = (req, res) => {
@@ -28,31 +28,28 @@ const scheduleMeeting = (req, res) => {
 
 
 // Update a meeting
-const updateMeetingController = (req, res) => {
-  const { id } = req.params;
-  console.log('Received request to update meeting with id:', id);
-  console.log('Request body:', req.body);
+const updateMeeting = (req, res) => {
+  const id = parseInt(req.params.id, 10); // Convert to an integer
+  if (isNaN(id)) {
+    return res.status(400).json({ error: 'Invalid meeting ID' });
+  }
 
-  updateMeeting(id, req.body, (err, result) => {
+  const updatedData = req.body;
+  console.log('Received request to update meeting with ID:', id);
+  console.log('Request body:', updatedData);
+
+  updateMeetingModel(id, updatedData, (err, result) => {
     if (err) {
-      console.error('Database error:', err.message);
-      res.status(500).json({ error: err.message });
-    } else {
-      if (result.affectedRows === 0) {
-        res.status(404).json({ error: 'Meeting not found' });
-      } else {
-        // Fetch the updated meeting and return it
-        getMeetingById(id, (err, meeting) => {
-          if (err) {
-            res.status(500).json({ error: err.message });
-          } else {
-            res.json(meeting[0]);
-          }
-        });
-      }
+      console.error('Database error in updateMeeting:', err.message);
+      return res.status(500).json({ error: err.message });
     }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Meeting not found' });
+    }
+    res.json({ message: 'Meeting updated successfully' });
   });
 };
+
 
 // Cancel a meeting
 const cancelMeeting = (req, res) => {
@@ -66,4 +63,4 @@ const cancelMeeting = (req, res) => {
   });
 };
 
-module.exports = { fetchMeetings, scheduleMeeting, updateMeeting: updateMeetingController, cancelMeeting };
+module.exports = { fetchMeetings, scheduleMeeting, updateMeeting, cancelMeeting };
