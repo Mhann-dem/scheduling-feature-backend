@@ -31,7 +31,7 @@ src/
 ### Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/scheduling-feature-frontend.git
+   git clone https://github.com/Mhann-dem/scheduling-feature.git
    cd scheduling-feature-frontend
    ```
 
@@ -88,7 +88,7 @@ src/
 ### Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/scheduling-feature-backend.git
+   git clone https://github.com/Mhann-dem/scheduling-feature-backend.git
    cd scheduling-feature-backend
    ```
 
