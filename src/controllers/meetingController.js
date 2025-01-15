@@ -1,4 +1,4 @@
-const { getAllMeetings, createMeeting, deleteMeeting, updateMeeting } = require('../models/meetingModel');
+const { getAllMeetings, createMeeting, deleteMeeting, updateMeeting: updateMeetingModel } = require('../models/meetingModel');
 
 // Get all meetings
 const fetchMeetings = (req, res) => {
@@ -12,7 +12,6 @@ const fetchMeetings = (req, res) => {
   });
 };
 
-
 // Schedule a meeting
 const scheduleMeeting = (req, res) => {
   console.log('Received request body for new meeting:', req.body); // Debugging log
@@ -25,7 +24,6 @@ const scheduleMeeting = (req, res) => {
     res.status(201).json({ message: 'Meeting scheduled successfully', id: result.insertId });
   });
 };
-
 
 // Update a meeting
 const updateMeeting = (req, res) => {
@@ -49,7 +47,6 @@ const updateMeeting = (req, res) => {
     res.json({ message: 'Meeting updated successfully' });
   });
 };
-
 
 // Cancel a meeting
 const cancelMeeting = (req, res) => {
